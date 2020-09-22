@@ -1,0 +1,6 @@
+[local]
+mysql_host = "localhost"
+mysql_user = "ben"
+mysql_password = "123456"
+mysql_db_name = "posts_manager"
+log_level = "DEBUG"
