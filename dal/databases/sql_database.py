@@ -41,7 +41,7 @@ class SqlDataBase(BaseDataBase):
         self.connection.commit()
 
     def __joinner_pointing_on_me(self, table_name, identifaction, keys_to_get=None):
-        res = {}
+        result = {}
 
         cursor = self.connection.cursor()
         cursor.execute("SELECT TABLE_NAME FROM information_schema.KEY_COLUMN_USAGE WHERE REFERENCED_TABLE_NAME = '{table_name}' and REFERENCED_TABLE_NAME IS NOT NULL".format(
@@ -51,14 +51,14 @@ class SqlDataBase(BaseDataBase):
 
         for row in tables_pointing_table_name:
             # row[0] = table that point my table_name
-            res.update(self.__joinner_pointing_on(
+            result.update(self.__joinner_pointing_on(
                 row[0], identifaction, table_name))
 
         cursor.close()
-        return res
+        return result
 
 
-    def __joinner_pointing_on(self, table_name, identifaction, main_table=None):
+    def __joinner_pointing_on(self, table_name, identifaction, table_to_join_by=None):
         result = {}
         cursor = self.connection.cursor()
 
@@ -66,17 +66,17 @@ class SqlDataBase(BaseDataBase):
             table_name=table_name))
 
         result_set = cursor.fetchall()
-        # main_item_id in this case post_id
-        if main_table is not None:
-            main_item_id = [row for row in result_set if main_table in row][0][0]
+        # item_name_to_join_by in this case post_id
+        if table_to_join_by is not None:
+            item_name_to_join_by = [row for row in result_set if table_to_join_by in row][0][0]
 
         for row in result_set:
             # row[1] - table that table_name pointing on
             # we dont want to get the data of the main table every time
-            if(main_table is None):
-                main_item_id = row[2]
+            if(table_to_join_by is None):
+                item_name_to_join_by = row[2]
 
-            if(row[1] == main_table):
+            if(row[1] == table_to_join_by):
                 continue
             
             cursor.execute(
@@ -86,7 +86,7 @@ class SqlDataBase(BaseDataBase):
                 INNER JOIN {refernce_table_name} ON {table_name}.{column_name} = {refernce_table_name}.{refernce_column_name} {conditions}".format(
                     table_name=table_name,
                     conditions=' AND {identifaction}'.format(
-                    identifaction = table_name + '.' + main_item_id + '=' + identifaction),
+                    identifaction = table_name + '.' + item_name_to_join_by + '=' + identifaction),
                     column_name=row[0],
                     refernce_table_name=row[1],
                     refernce_column_name=row[2]
