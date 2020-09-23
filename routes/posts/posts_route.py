@@ -10,4 +10,7 @@ class PostsRoute:
 
         self.blueprint.add_url_rule(
             "/posts", "delete_post",self.posts_ctrl.delete_post, methods=["DELETE"])
+
+        self.blueprint.add_url_rule(
+            "/posts/<id>", "read_post",self.posts_ctrl.read_post, methods=["GET"])
     
