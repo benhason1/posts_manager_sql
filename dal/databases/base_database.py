@@ -6,7 +6,7 @@ class BaseDataBase(ABC):
         self.connection = None
 
     @abstractmethod
-    def connect(self, db_url):
+    def connect(self, host, user, password, database):
         pass
 
     @abstractmethod
@@ -14,7 +14,7 @@ class BaseDataBase(ABC):
         pass
 
     @abstractmethod
-    def read(self, table_name, conditions, keys_to_get=None):
+    def read(self, table_name, identifaction, keys_to_get=None):
         pass
 
     @abstractmethod
