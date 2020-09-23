@@ -71,11 +71,11 @@ class SqlDataBase(BaseDataBase):
             item_name_to_join_by = [row for row in result_set if table_to_join_by in row][0][0]
 
         for row in result_set:
-            # row[1] - table that table_name pointing on
-            # we dont want to get the data of the main table every time
             if(table_to_join_by is None):
                 item_name_to_join_by = row[2]
 
+            # row[1] - table that table_name pointing on
+            # we dont want to get the data of the main table every time
             if(row[1] == table_to_join_by):
                 continue
             
