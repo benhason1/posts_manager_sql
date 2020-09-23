@@ -24,7 +24,7 @@ class SqlDataBase(BaseDataBase):
     def dict_to_conditions(conditions_dict):
         if(conditions_dict == {}):
             return ''
-        return ' AND ' + ' AND '.join(["{key} = '{value}'".format(
+        return ' AND '.join(["{key} = '{value}'".format(
             key=key, value=value) for key, value in conditions_dict.items()]).strip()
 
     def create(self, table_name, object_to_create):

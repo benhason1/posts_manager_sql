@@ -7,3 +7,7 @@ class PostsRoute:
         self.blueprint = Blueprint("posts", __name__)
         self.blueprint.add_url_rule(
             "/posts", "create_post",self.posts_ctrl.create_post, methods=["POST"])
+
+        self.blueprint.add_url_rule(
+            "/posts", "delete_post",self.posts_ctrl.delete_post, methods=["DELETE"])
+    
