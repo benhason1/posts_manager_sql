@@ -104,7 +104,7 @@ class SqlDataBase(BaseDataBase):
         cursor.close()
         return result
 
-    def read(self, table_name, identifaction, keys_to_get=None):
+    def read(self, table_name, identifaction):
         result = {}
 
         result.update(self.__joinner_pointing_on_me(table_name, identifaction))
@@ -125,5 +125,5 @@ class SqlDataBase(BaseDataBase):
 
         self.connection.commit()
 
-    def update(self, table_name, conditions, object_to_update):
+    def update(self, table_name, identifaction, updated_object):
         pass

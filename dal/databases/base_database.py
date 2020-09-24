@@ -14,7 +14,7 @@ class BaseDataBase(ABC):
         pass
 
     @abstractmethod
-    def read(self, table_name, identifaction, keys_to_get=None):
+    def read(self, table_name, identifaction):
         pass
 
     @abstractmethod
@@ -22,5 +22,5 @@ class BaseDataBase(ABC):
         pass
 
     @abstractmethod
-    def update(self, table_name, conditions, object_to_update):
+    def update(self, table_name, identifaction, updated_object):
         pass
