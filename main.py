@@ -2,9 +2,9 @@ import logging
 from dynaconf import settings
 from dal.databases.sql_database import SqlDataBase
 from flask import Flask
-from routes.posts.posts_controller import PostsController
+from routes.posts.controllers.sql_controller import SqlController as PostsController
 from routes.posts.posts_route import PostsRoute
-from routes.users.users_controller import UsersController
+from routes.users.controllers.sql_controller import SqlController as UsersController    
 from routes.users.users_route import UsersRoute
 
 def main():

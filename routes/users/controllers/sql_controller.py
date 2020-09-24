@@ -1,6 +1,7 @@
+from .base_controller import BaseController
 from flask import request
 
-class UsersController:
+class SqlController(BaseController):
     def __init__(self, base_data_base):
         self.db_wrapper = base_data_base
 

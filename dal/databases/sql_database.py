@@ -1,4 +1,4 @@
-from dal.databases.base_database import BaseDataBase
+from .base_database import BaseDataBase
 import mysql.connector
 from dynaconf import settings
 
@@ -36,9 +36,14 @@ class SqlDataBase(BaseDataBase):
             values=", ".join(["%({key})s".format(key=key) for key in object_to_create.keys()])).strip()
 
         cursor.execute(sql, object_to_create)
+        self.connection.commit()
+
+        # created_row_id = cursor.fetchone()
         cursor.close()
 
-        self.connection.commit()
+        return cursor.lastrowid
+
+
 
     def __joinner_pointing_on_me(self, table_name, identifaction, keys_to_get=None):
         result = {}
