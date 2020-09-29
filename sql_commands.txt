@@ -1,0 +1,20 @@
+alter table posts_manager.posts
+add foreign key (creator_user_id) references posts_manager.users(ID);
+
+alter table posts_manager.admin_users_to_posts add post_id INT NOT NULL;
+alter table posts_manager.admin_users_to_posts add user_id INT NOT NULL;
+
+alter table posts_manager.admin_users_to_posts
+add foreign key (post_id) references posts_manager.posts(ID);
+
+alter table posts_manager.admin_users_to_posts
+add foreign key (user_id) references posts_manager.users(ID);
+
+alter table posts_manager.comments_to_posts add post_id INT NOT NULL;
+alter table posts_manager.comments_to_posts add comment_id INT NOT NULL;
+
+alter table posts_manager.comments_to_posts
+add foreign key (post_id) references posts_manager.posts(ID);
+
+alter table posts_manager.comments_to_posts
+add foreign key (comment_id) references posts_manager.comments(ID);
